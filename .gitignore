@@ -1,0 +1,8 @@
+*.Rhistory
+*.DS_Store*
+*.aux
+*.dvi
+*.bbl
+*.log
+*.blg
+*.out

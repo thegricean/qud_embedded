@@ -6,3 +6,4 @@
 *.log
 *.blg
 *.out
+results/1_pilot_data/qud_results.csv

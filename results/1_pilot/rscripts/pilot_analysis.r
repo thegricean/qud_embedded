@@ -7,12 +7,12 @@ source("helpers.R")
 # load data
 # d = read.table(file="../data/qud_results.csv",sep=";",header=T,quote="\"") %>%
 #   filter(!is.na(Eachsome.S2s2a4a4))
-#   
+# 
 # d$workerid = as.factor(as.numeric(d$Worker.ID))
 # d$Worker.ID = NULL
 # d$HIT.ID = NULL
-# 
-# # write anonymized results, to be loaded in the future  
+# # 
+# # # write anonymized results, to be loaded in the future  
 # write.csv(d, file="../data/pilot_data.csv",row.names=F)
 
 # load data

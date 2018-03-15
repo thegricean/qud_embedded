@@ -57,3 +57,27 @@ ggplot(means,aes(x=QuD,y=Mean,fill=Scene)) +
   geom_bar(stat="identity",position=dodge) +
   geom_errorbar(aes(ymin=YMin,ymax=YMax),position=dodge,width=.25) +
   facet_wrap(~Utterance)
+ggsave("../graphs/allmeans.pdf",width=13,height=10)
+
+# for analysis, look only at "each...some" utterances and exclude floor/ceiling sanity checks
+eachsome = dd %>% 
+  filter(Utterance == "Eachsome") %>%
+  droplevels() %>%
+  mutate(Scene = as.factor(Scene),Response = as.factor(as.character(Response)))
+summary(eachsome)
+
+eachsomemeans = eachsome %>%
+  group_by(Scene,QuD) %>%
+  mutate(Response = as.numeric(as.character(Response))) %>%
+  summarize(Mean=mean(Response),CILow=ci.low(Response),CIHigh=ci.high(Response)) %>%
+  ungroup() %>%
+  mutate(YMin=Mean-CILow,YMax=Mean+CIHigh)
+dodge = position_dodge(.9)
+eachsomemeans[eachsomemeans$QuD == "anyany",c("Scene","Mean")]
+
+ggplot(eachsomemeans,aes(x=QuD,y=Mean,fill=Scene)) +
+  geom_bar(stat="identity",position=dodge) +
+  geom_errorbar(aes(ymin=YMin,ymax=YMax),position=dodge,width=.25) 
+
+m = glmer(Response ~ Scene + QuD + (1|workerid),family="binomial",data=eachsome %>% filter(! Scene %in% c("N0n0s2s3","S2s3s2s3")) %>% droplevels())
+summary(m)

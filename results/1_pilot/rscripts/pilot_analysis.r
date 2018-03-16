@@ -79,5 +79,12 @@ ggplot(eachsomemeans,aes(x=QuD,y=Mean,fill=Scene)) +
   geom_bar(stat="identity",position=dodge) +
   geom_errorbar(aes(ymin=YMin,ymax=YMax),position=dodge,width=.25) 
 
-m = glmer(Response ~ Scene + QuD + (1|workerid),family="binomial",data=eachsome %>% filter(! Scene %in% c("N0n0s2s3","S2s3s2s3")) %>% droplevels())
+toanalyze = eachsome %>% 
+  filter(! Scene %in% c("N0n0s2s3","S2s3s2s3")) %>% 
+  droplevels()
+
+contrasts(toanalyze$Scene) = cbind("weak.to.literal"=c(1,0))
+contrasts(toanalyze$QuD) = cbind("allall.vs.anyany"=c(1,0,0,0),"anyall.vs.anyany"=c(0,1,0,0),"allany.vs.anyany"=c(0,0,0,1))
+
+m = glmer(Response ~ Scene + QuD + (1|workerid),family="binomial",data=toanalyze)
 summary(m)

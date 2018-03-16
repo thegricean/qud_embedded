@@ -36,7 +36,7 @@ We test two competing hypotheses:
 1. If embedded implicatures are insensitive to QuD manipulations:
 	- % TRUE respones: literal < weak in all QuD contexts
 
-2. If there is an interaction between QuD and inference condition:
+2. If there is an interaction between QuD and inference condition, in terms of % TRUE responses:
 	- literal < weak in each-all QuD context
 	- literal = weak in any-any QuD context
 	- exploratory for any-all and all-any QuD context, but intermediate in comparison with each-all and any-any
@@ -46,10 +46,10 @@ We test two competing hypotheses:
 ## Analysis
 
 Mixed effects logistic regression predicting TRUE responses from
-	- fixed effects: 
-		- main effect: 2 inference conditions (weak, literal), with weak as reference level
-		- main effect: 4 QuD conditions (allall, anyany, allany, anyall), with anyany as reference level
-	- random effects:
-		- by-subject random intercepts 
-		- no random slopes because between-subjects manipulation for QUD, and only one data point per inference condition per subject
-		- no by-item random effects because there are no different items that aren't entirely confounded with inference condition
+- fixed effects: 
+	- main effect: 2 inference conditions (weak, literal), with weak as reference level
+	- main effect: 4 QuD conditions (allall, anyany, allany, anyall), with anyany as reference level
+- random effects:
+	- by-subject random intercepts 
+	- no random slopes because between-subjects manipulation for QUD, and only one data point per inference condition per subject
+	- no by-item random effects because there are no different items that aren't entirely confounded with inference condition
